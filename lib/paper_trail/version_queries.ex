@@ -86,7 +86,10 @@ defmodule PaperTrail.VersionQueries do
   end
 
   defp version_query(item_type, id) do
-    from(v in Version, where: v.item_type == ^item_type and v.item_id == ^id)
+    from(v in Version,
+      where: v.item_type == ^item_type and v.item_id == ^id,
+      order_by: [asc: v.inserted_at]
+    )
   end
 
   defp version_query(item_type, id, options) do
